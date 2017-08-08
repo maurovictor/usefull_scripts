@@ -1,0 +1,12 @@
+[Unit]
+Description=Running server with docker 
+After=docker.service
+Requires=docker.service
+
+[Service]
+ExecStartPre=-/usr/bin/docker rm webtester
+ExecStart=/usr/bin/docker run --name webtester -d -p 80:80 maurovictor/js_placas:0.3.2
+ExecStop=/usr/bin/docker stop webtester
+
+[Install] 
+WantedBy=multi-user.target
